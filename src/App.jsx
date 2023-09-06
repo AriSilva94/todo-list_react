@@ -7,11 +7,24 @@ import "./assets/styles/App.css";
 
 function App() {
   const [todos, setTodos] = useState(todo);
+
+  const addTodo = (text, category) => {
+    const newTodos = [
+      ...todos,
+      {
+        id: Math.floor(Math.random() * 100000),
+        text,
+        category,
+        isComplete: false,
+      },
+    ];
+    setTodos(newTodos);
+  };
   return (
     <div className="app">
       <Header />
-      <Todo {...{ todos }} />
-      <Form />
+      <Todo {...{ todos, setTodos }} />
+      <Form {...{ todos, addTodo }} />
     </div>
   );
 }

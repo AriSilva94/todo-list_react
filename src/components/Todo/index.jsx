@@ -1,20 +1,46 @@
-export const Todo = ({ todos }) => {
+import "./style.css";
+
+export const Todo = ({ todos, setTodos }) => {
+  const removeTodo = (id) => {
+    const newTodos = [...todos];
+    const filteredTodos = newTodos.filter((todo) =>
+      todo.id !== id ? todo : null
+    );
+    setTodos(filteredTodos);
+  };
+
+  const completeTodo = (id) => {
+    const newTodos = [...todos];
+    newTodos.map((todo) =>
+      todo.id === id ? (todo.isCompleted = !todo.isCompleted) : todo
+    );
+    setTodos(newTodos);
+  };
+
   return (
     <div className="todo-list">
-      <ul>
-        {todos.map(({ id, text, category }) => (
-          <div key={id} className="todo">
+      <div>
+        {todos.map(({ id, text, category, isCompleted }) => (
+          <div
+            key={id}
+            className="todo"
+            style={{ textDecoration: isCompleted ? "line-through" : "" }}
+          >
             <div className="content">
               <p>{text}</p>
               <p className="category">({category})</p>
-              <div>
-                <button>Completar</button>
-                <button>x</button>
-              </div>
+            </div>
+            <div className="todo-buttons">
+              <button className="complete" onClick={() => completeTodo(id)}>
+                Completar
+              </button>
+              <button className="remove" onClick={() => removeTodo(id)}>
+                x
+              </button>
             </div>
           </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
