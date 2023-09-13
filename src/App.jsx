@@ -4,9 +4,11 @@ import { Header } from "./components/Header";
 import { Todo } from "./components/Todo";
 import { Form } from "./components/Form";
 import "./assets/styles/App.css";
+import { Search } from "./components/Search";
 
 function App() {
   const [todos, setTodos] = useState(todo);
+  const [search, setSearch] = useState("");
 
   const addTodo = (text, category) => {
     const newTodos = [
@@ -23,7 +25,8 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <Todo {...{ todos, setTodos }} />
+      <Search {...{ search, setSearch }} />
+      <Todo {...{ search, todos, setTodos }} />
       <Form {...{ todos, addTodo }} />
     </div>
   );
