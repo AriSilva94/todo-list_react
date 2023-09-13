@@ -5,6 +5,7 @@ import { Todo } from "./components/Todo";
 import { Form } from "./components/Form";
 import "./assets/styles/App.css";
 import { Search } from "./components/Search";
+import { Filter } from "./components/Filter";
 
 function App() {
   const [todos, setTodos] = useState(todo);
@@ -26,6 +27,7 @@ function App() {
     <div className="app">
       <Header />
       <Search {...{ search, setSearch }} />
+      <Filter />
       <Todo {...{ search, todos, setTodos }} />
       <Form {...{ todos, addTodo }} />
     </div>
