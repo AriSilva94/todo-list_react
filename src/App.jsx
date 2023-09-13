@@ -10,6 +10,8 @@ import { Filter } from "./components/Filter";
 function App() {
   const [todos, setTodos] = useState(todo);
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("all");
+  const [sort, setSort] = useState("asc");
 
   const addTodo = (text, category) => {
     const newTodos = [
@@ -27,8 +29,8 @@ function App() {
     <div className="app">
       <Header />
       <Search {...{ search, setSearch }} />
-      <Filter />
-      <Todo {...{ search, todos, setTodos }} />
+      <Filter {...{ filter, setFilter, setSort }} />
+      <Todo {...{ sort, filter, search, todos, setTodos }} />
       <Form {...{ todos, addTodo }} />
     </div>
   );

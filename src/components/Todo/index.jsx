@@ -1,6 +1,6 @@
 import "./style.css";
 
-export const Todo = ({ search, todos, setTodos }) => {
+export const Todo = ({ sort, filter, search, todos, setTodos }) => {
   const removeTodo = (id) => {
     const newTodos = [...todos];
     const filteredTodos = newTodos.filter((todo) =>
@@ -22,7 +22,19 @@ export const Todo = ({ search, todos, setTodos }) => {
       <div>
         {todos
           .filter((todo) =>
+            filter === "all"
+              ? true
+              : filter === "completed"
+              ? todo.isCompleted
+              : !todo.isCompleted
+          )
+          .filter((todo) =>
             todo.text.toLowerCase().includes(search.toLowerCase())
+          )
+          .sort((a, b) =>
+            sort === "asc"
+              ? a.text.localeCompare(b.text)
+              : b.text.localeCompare(a.text)
           )
           .map(({ id, text, category, isCompleted }) => (
             <div
